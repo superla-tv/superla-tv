@@ -5,41 +5,37 @@ import dbRef from './firebase';
 //Modules
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-// import { getDatabase, ref } from './firebase/database';
 
-/*const firebase = initializeApp(firebaseConfig);
-const database = getDatabase(firebase);
-const dbRef = ref(database);
 
-export default dbRef;
- */
+const App = () => {
 
-function App() {
-
-  useEffect (() => {
-
-    console.log('dbRef', dbRef);
+  const handleShowSearch = (e) => {
+    e.preventDefault();
+    const query = e.target[0].value;
     axios({
-
       url: "https://api.tvmaze.com/search/shows",
-      method: "GET",
       params: {
-        q: "superhero",
-
+        q: query
       }
-
     })
-
-  .then((response) => {
-
-    console.log(response)
-  })
-  
-}, [])
+    .then((response) => {
+      console.log('API response', response)
+    })
+  }
 
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Superla-TV</h1>
+        <form onSubmit={(e) => {handleShowSearch(e)}}>
+          <label htmlFor='query'></label>
+          <input 
+          type='text' 
+          id='query'
+          placeholder='enter tv show here'
+          />
+          <button>Search</button>
+        </form> 
       </header>
     </div> 
   ); 
