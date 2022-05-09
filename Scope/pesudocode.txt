@@ -1,2 +1,44 @@
 // SuperlaTV pseudocode 
+On load, render
+  Home Page
+  Nav Routes to: 
+    My Lists
+    Info/how-to
+    (lower right icon on click) modal with introduction and with "how-to"
 
+When title/query submitted in search:
+  check for errors
+    display error message if needed
+  if data comes in, 
+    get the data
+    clear previous data
+      display all results from API (based on API rating)
+        poster
+        title
+        show info modal button
+        add to list option (list options pulled from firebase)
+    
+
+My Lists Page
+  Render from firebase:
+    Create new list option
+      When list is made
+        create empty results array
+        change the data (add attribute for user rating)
+        add altered data to new array
+        order list based on user rating (superla-tv rating)
+    List choice dropdown
+      When list is chosen
+        Display movies on the list (based on upvote/downvote)
+          poster
+          title
+          current ranking
+          remove from list option
+          upvote option
+          downvote option
+        Display which list is actively shown
+        Delete list option shown
+          if clicked, confirm the deletion
+            remove from firebase (or save for the end/dependency array)
+            show user something happened (re-render)
+ 
