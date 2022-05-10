@@ -1,27 +1,44 @@
-//Styling
+// Styling
 import './App.css';
-//Config
+// Config
 import dbRef from './firebase';
-//Modules
+// Modules
 import { useEffect, useState } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+// Components
+import TVResults from './Components/TVResults';
 
 
 const App = () => {
+  const [ showSearch, setShowSearch ] = useState('');
+  const [ tvRes, setTVRes ] = useState([]);
+  const [ handleSubmit, setHandleSubmit] = useState(false);
 
   const handleShowSearch = (e) => {
     e.preventDefault();
-    const query = e.target[0].value;
-    axios({
-      url: "https://api.tvmaze.com/search/shows",
-      params: {
-        q: query
-      }
-    })
-    .then((response) => {
-      console.log('API response', response)
-    })
+    setShowSearch(e.target[0].value)
+    setHandleSubmit(true)
   }
+
+
+  useEffect(() => {
+      axios({
+        url: "https://api.tvmaze.com/search/shows",
+        params: {
+          q: showSearch
+        }
+      })
+      .then((response) => {
+        const tvResults = response.data
+        setTVRes(tvResults);
+        console.log(tvRes)
+      })
+      .catch(err => {
+        console.log(err, "Something went wrong!")
+      });
+  }, [showSearch])
+
 
   return (
     <div className="App">
@@ -37,6 +54,17 @@ const App = () => {
           <button>Search</button>
         </form> 
       </header>
+      
+      <main className="tvResults">
+        { handleSubmit ? 
+        <TVResults 
+        tvRes={tvRes} 
+        showSearch={showSearch} 
+        /> 
+        :
+        null 
+        } 
+      </main>
     </div> 
   ); 
 }
