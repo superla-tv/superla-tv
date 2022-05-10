@@ -8,6 +8,8 @@ import { Link, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 // Components
 import TVResults from './Components/TVResults';
+import Nav from './Components/Nav';
+import Lists from './Components/Lists'
 
 
 const App = () => {
@@ -43,6 +45,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <Nav />
         <h1>Superla-TV</h1>
         <form onSubmit={(e) => {handleShowSearch(e)}}>
           <label htmlFor='query'></label>
@@ -54,6 +57,8 @@ const App = () => {
           <button>Search</button>
         </form> 
       </header>
+
+      
       
       <main className="tvResults">
         { handleSubmit ? 
@@ -65,6 +70,10 @@ const App = () => {
         null 
         } 
       </main>
+      <Routes>
+        {/* <Route path="/" element={<App />} /> */}
+        <Route path="/lists" element={<Lists />} />
+      </Routes>
     </div> 
   ); 
 }
