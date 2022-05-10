@@ -4,7 +4,7 @@ import './App.css';
 import dbRef from './firebase';
 // Modules
 import { useEffect, useState } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 // Components
 import TVResults from './Components/TVResults';
@@ -21,6 +21,7 @@ const Home = () => {
     setShowSearch(e.target[0].value)
     setHandleSubmit(true)
   }
+
 
   useEffect(() => {
     axios({
