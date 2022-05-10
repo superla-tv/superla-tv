@@ -1,5 +1,4 @@
 const TVResults = ({ tvRes, showSearch }) => {
-    // console.log('TVResults tvRes', tvRes);
     return (
         <>
             {
@@ -29,9 +28,7 @@ const TVResults = ({ tvRes, showSearch }) => {
                                             <option value="oranges">Oranges</option>
                                             <option value="apples">Apples</option>
                                             <option value="bananas">Bananas</option>
-
-
-                                            {/* create new options with firebase */}
+                                        {/* create new options with firebase */}
                                         </select>
                                     </form>
                                 </div>

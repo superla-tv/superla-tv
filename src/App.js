@@ -9,13 +9,12 @@ import axios from 'axios';
 // Components
 import TVResults from './Components/TVResults';
 import Nav from './Components/Nav';
-import Lists from './Components/Lists'
+import Lists from './Components/Lists';
 
-
-const App = () => {
-  const [ showSearch, setShowSearch ] = useState('');
-  const [ tvRes, setTVRes ] = useState([]);
-  const [ handleSubmit, setHandleSubmit] = useState(false);
+const Home = () => {
+  const [showSearch, setShowSearch] = useState('');
+  const [tvRes, setTVRes] = useState([]);
+  const [handleSubmit, setHandleSubmit] = useState(false);
 
   const handleShowSearch = (e) => {
     e.preventDefault();
@@ -23,14 +22,13 @@ const App = () => {
     setHandleSubmit(true)
   }
 
-
   useEffect(() => {
-      axios({
-        url: "https://api.tvmaze.com/search/shows",
-        params: {
-          q: showSearch
-        }
-      })
+    axios({
+      url: "https://api.tvmaze.com/search/shows",
+      params: {
+        q: showSearch
+      }
+    })
       .then((response) => {
         const tvResults = response.data
         setTVRes(tvResults);
@@ -41,41 +39,47 @@ const App = () => {
       });
   }, [showSearch])
 
+  return (
+    <>
+      <h1>Superla-TV</h1>
+      <form onSubmit={(e) => { handleShowSearch(e) }}>
+        <label htmlFor='query'></label>
+        <input
+          type='text'
+          id='query'
+          placeholder='enter tv show here'
+        />
+        <button>Search</button>
+      </form>
+      <main className="tvResults">
+        {handleSubmit ?
+          <TVResults
+            tvRes={tvRes}
+            showSearch={showSearch}
+          />
+          :
+          null
+        }
+      </main>
+    </>
+  )
+}
+
+
+const App = () => {
 
   return (
     <div className="App">
       <header className="App-header">
         <Nav />
-        <h1>Superla-TV</h1>
-        <form onSubmit={(e) => {handleShowSearch(e)}}>
-          <label htmlFor='query'></label>
-          <input 
-          type='text' 
-          id='query'
-          placeholder='enter tv show here'
-          />
-          <button>Search</button>
-        </form> 
       </header>
 
-      
-      
-      <main className="tvResults">
-        { handleSubmit ? 
-        <TVResults 
-        tvRes={tvRes} 
-        showSearch={showSearch} 
-        /> 
-        :
-        null 
-        } 
-      </main>
       <Routes>
-        {/* <Route path="/" element={<App />} /> */}
+        <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
       </Routes>
-    </div> 
-  ); 
+    </div>
+  );
 }
 
 export default App;
