@@ -15,11 +15,10 @@ const Home = () => {
   const [showSearch, setShowSearch] = useState('');
   const [tvRes, setTVRes] = useState([]);
   const [handleSubmit, setHandleSubmit] = useState(false);
-
   const handleShowSearch = (e) => {
     e.preventDefault();
-    setShowSearch(e.target[0].value)
-    setHandleSubmit(true)
+    setShowSearch(e.target[0].value);
+    setHandleSubmit(true);
   }
 
 
@@ -33,17 +32,17 @@ const Home = () => {
       .then((response) => {
         const tvResults = response.data
         setTVRes(tvResults);
-        console.log(tvRes)
+        console.log(tvRes) // remove this 
       })
       .catch(err => {
-        console.log(err, "Something went wrong!")
+        alert(err, "Something went wrong!")
       });
   }, [showSearch])
 
   return (
     <>
       <h1>Superla-TV</h1>
-      <form onSubmit={(e) => { handleShowSearch(e) }}>
+      <form onSubmit={handleShowSearch}>
         <label htmlFor='query'></label>
         <input
           type='text'
