@@ -6,6 +6,15 @@ import { useEffect } from 'react';
 // import 'reactjs-popup/dist/index.css';
 
 const TVResults = ({ tvRes, showSearch }) => {
+
+    // // const premieredDate = tvRes[0].show.premiered;
+    // console.log("tvRes", tvRes);
+    // tvRes.map((i) => {
+    //     console.log(i.show.premiered);
+    //     console.log(i.show.ended);
+    // })
+
+
     const handleListName = (e) => {
         e.preventDefault();
         const listName = e.target[0].value;
@@ -64,7 +73,40 @@ const TVResults = ({ tvRes, showSearch }) => {
                             </div>
                             <div className="flexContainer">
                                 <h2>{i.show.name}</h2>
-                                <button>Show Info</button>
+                                <p>Premiered: {i.show.premiered === null ? "N/A" : i.show.premiered} - Ended: {i.show.ended === null ? "N/A" : i.show.ended}</p>
+                                <Popup
+                                    trigger={
+                                        <button className="button">Show Info</button>
+                                    }
+                                    modal
+                                    nested
+                                >
+                                    {(close) => (
+                                        <div className="infoModal modal">
+                                            <div className="imgContainer">
+                                                {i.show.image === null ? (
+                                                    <img src="./assets/no-img-portrait-text.png" alt="stuff" />
+                                                ) : (
+                                                    <img
+                                                        src={i.show.image.original}
+                                                        alt={`TV poster for ${i.show.name}`}
+                                                    />
+                                                )}
+                                            </div>
+                                            <div className="textContainer">
+                                                <p>Title: {i.show.name}</p>
+                                                <p>Network: {i.show.network.name}</p>
+                                                <p>Country: {i.show.network.country.code}</p>
+                                                <p>Genre(s): {i.show.genre}</p>
+                                                {/* BROKEN HERE COME BACK */}
+                                                <p className="summary">{i.show.summary}</p>
+                                            </div>
+                                            <button className="close" onClick={close}>
+                                                X
+                                            </button>
+                                        </div>
+                                    )}
+                                </Popup>
                                 <Popup
                                     trigger={
                                         <button className="button">Create New List</button>
@@ -92,13 +134,6 @@ const TVResults = ({ tvRes, showSearch }) => {
                                             className="selectAList"
                                             defaultValue="selectAList"
                                         >
-                                            {/* <option value="selectAList" disabled>
-                                                Select A List...
-                                            </option> */}
-                                            {/* <option value="oranges">Oranges</option>
-                                            <option value="apples">Apples</option>
-                                            <option value="bananas">Bananas</option> */}
-                                            {/* create new options with firebase */}
                                         </select>
                                     </form>
                                 </div>

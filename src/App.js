@@ -32,7 +32,7 @@ const Home = () => {
       .then((response) => {
         const tvResults = response.data
         setTVRes(tvResults);
-        console.log(tvRes) // remove this 
+        console.log(tvResults)
       })
       .catch(err => {
         alert(err, "Something went wrong!")
