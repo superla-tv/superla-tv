@@ -63,4 +63,12 @@ background-color: aqua;
 
 .flexContainer select {
   margin: 5px 0;
+  padding: 3px 0;
+  max-width: 80%;
+  text-align: center;
+}
+
+.addToListContainer {
+  display: flex;
+  flex-direction: column-reverse;
 }
