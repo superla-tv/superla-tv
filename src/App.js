@@ -1,7 +1,7 @@
 // Styling
 import './App.css';
 // Config
-import dbRef from './firebase';
+// import dbRef from './firebase';
 // Modules
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
