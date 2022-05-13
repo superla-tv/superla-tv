@@ -1,7 +1,8 @@
-import Popup from "reactjs-popup";
-import database from "../firebase";
-import { useEffect, useState } from "react";
-import { ref, onValue, get } from "firebase/database";
+import Popup from 'reactjs-popup';
+import database from '../firebase';
+import { useEffect, useState } from 'react';
+import { ref, onValue } from 'firebase/database';
+import ListDisplay from './ListDisplay';
 
 const Lists = () => {
   // reach into firebase
@@ -20,58 +21,57 @@ const Lists = () => {
   //remove from list option
   //upvote
   //downvote
-   const [ listIdentifier, setListIdentifier] = useState("");
-   const chooseListHandler = (e) => {
+  const [listIdentifier, setListIdentifier] = useState('');
+  const [listOfShows, setListOfShows] = useState([]);
+
+  const chooseListHandler = (e) => {
     //take current key value of select
     setListIdentifier(e.target.selectedOptions[0].attributes.key.value);
-   }
+  };
 
-    const handleListName = (e) => {
-        e.preventDefault();
+  const handleListName = (e) => {
+    e.preventDefault();
     //     const listName = e.target[0].value;
     //     //firebase
     //     push(ref(database), {listName});
     //     alert(`New list created: ${listName}`);
+  };
+
+  const loadCustomLists = (response) => {
+    const theSelect = document.querySelector('.selectAList');
+    theSelect.innerText = '';
+    const disabledOption = document.createElement('option');
+    disabledOption.setAttribute('value', 'Select A List...');
+    disabledOption.setAttribute('disabled', '');
+    disabledOption.setAttribute('selected', 'selected');
+    disabledOption.innerText = 'Select A List...';
+    theSelect.appendChild(disabledOption);
+    const data = response.val();
+    for (let key in data) {
+      const displayedList = data[key].listName;
+      const theOption = document.createElement('option');
+      theOption.setAttribute('value', displayedList);
+      theOption.setAttribute('key', key);
+      theOption.innerText = displayedList;
+      theSelect.appendChild(theOption);
     }
-    
-    const loadCustomLists = (response) => {
-        const theSelect = document.querySelector('.selectAList');
-        theSelect.innerText = "";
-        const disabledOption = document.createElement('option');
-        disabledOption.setAttribute("value", "Select A List...");
-        disabledOption.setAttribute("disabled", "");
-        disabledOption.setAttribute("selected", "selected");
-        disabledOption.innerText = "Select A List...";            
-        theSelect.appendChild(disabledOption);
-        const data = response.val();
-        for (let key in data) {
-            const displayedList = data[key].listName;
-            const theOption = document.createElement('option');
-            theOption.setAttribute('value', displayedList);
-            theOption.setAttribute('key', key);
-            theOption.innerText = displayedList;            
-            theSelect.appendChild(theOption);
-        }
-    }
+  };
 
-    useEffect(() => {
-      const listInFirebase = ref(database, `/${listIdentifier}`);
-      //pull each of the shows from the chosen list
-      onValue(listInFirebase, (response) => {
-        const customListResponse = response.val();
-        const arrayCustomListResponse = Object.entries(customListResponse).map(
-          (e) => ({ [e[0]]: e[1] })
-        );
-        displayCustomList(arrayCustomListResponse);
-      });
-    }, [chooseListHandler]);
+  useEffect(() => {
+    const listInFirebase = ref(database, `/${listIdentifier}`);
+    // pull each of the shows from the chosen list
+    onValue(listInFirebase, (response) => {
+      const customListResponse = response.val();
+      const showArray = Object.entries(customListResponse);
+      setListOfShows(showArray);
+    });
+  }, [listIdentifier]);
 
-    useEffect(() => {
-      onValue(ref(database), (response) => {
-        loadCustomLists(response);
-      });
-    }, []);
-
+  useEffect(() => {
+    onValue(ref(database), (response) => {
+      loadCustomLists(response);
+    });
+  }, []);
 
   return (
     <>
@@ -109,12 +109,14 @@ const Lists = () => {
           )}
         </Popup>
         <button>Delete List</button>
-        <button>Refresh List</button> 
+        <button>Refresh List</button>
       </div>
       <h3 className="listTitle">
         Current List:
         {/* Selected list -> {_______} */}
       </h3>
+
+      <ListDisplay Array={listOfShows} />
     </>
   );
 };

@@ -1,83 +1,89 @@
-const displayCustomList = (array) => {
-  {array.map((i) => {
-      <div className="currentListContainer">
-  <div className="imgContainer">
-    {i.show.image === null ? (
-      <img
-        src="./assets/no-img-portrait-text.png"
-        alt="There is no image for this show"
-      />
-    ) : (
-      <img
-        src={i.show.image.original}
-        alt={`TV poster for ${i.show.name}`}
-      />
-    )}
-    <h5>TITLE OF SHOW HERE</h5>
-  </div>
+import Popup from 'reactjs-popup';
 
-  <div className="currentListButtons">
-    <Popup
-      trigger={<button className="button">Show Info</button>}
-      modal
-      nested
-    >
-      {(close) => (
-        <div className="infoModal modal">
-          <div className="imgContainer">
-            {i.show.image === null ? (
-              <img src="./assets/no-img-portrait-text.png" alt="stuff" />
-            ) : (
-              <img
-                src={i.show.image.original}
-                alt={`TV poster for ${i.show.name}`}
-              />
-            )}
+const ListDisplay = ({ Array }) => {
+  return (
+    <>
+      <div className="currentListContainer wrapper">
+        {Array.map((i) => (
+          <div className="showContainer" key={i[0]}>
+            <div className="imgContainer">
+              {i[1][2] === null ? (
+                <img
+                  src="./assets/no-img-portrait-text.png"
+                  alt="Nothing to show"
+                />
+              ) : (
+                <img src={i[1][2]} alt={`TV poster for ${i[1][0]}`} />
+              )}
+              <h2>{i[1][0]}</h2>
+              <p>
+                Premiered: {i[1][3] === null ? 'N/A' : i[1][3]} - Ended:{' '}
+                {i[1][4] === null ? 'N/A' : i[1][4]}
+              </p>
+            </div>
+
+            <div className="currentListButtons">
+              <Popup
+                trigger={<button className="button">Show Info</button>}
+                modal
+                nested
+              >
+                {(close) => (
+                  <div className="infoModal modal">
+                    <div className="imgContainer">
+                      {i[1][2] === null ? (
+                        <img
+                          src="./assets/no-img-portrait-text.png"
+                          alt="Nothing to show"
+                        />
+                      ) : (
+                        <img src={i[1][2]} alt={`TV poster for ${i[1][0]}`} />
+                      )}
+                    </div>
+
+                    <div className="textContainer">
+                      <p>Title: {i[1][0] === null ? 'N/A' : i[1][0]}</p>
+                      <p>
+                        Network:
+                        {i[1][6] === null
+                          ? 'N/A'
+                          : i[1][6] === null
+                          ? 'N/A'
+                          : i[1][6]}
+                      </p>
+                      <p>
+                        Country:
+                        {i[1][7] === null
+                          ? 'N/A'
+                          : i[1][7] === null
+                          ? 'N/A'
+                          : i[1][7] === null
+                          ? 'N/A'
+                          : i[1][7]}
+                      </p>
+
+                      <p className="summary">
+                        {
+                          i[1][5] === null ? 'N/A' : i[1][5]
+                          // .replace(/<(.|\n)*?>/g, '')
+                        }
+                      </p>
+                    </div>
+                    <button className="close" onClick={close}>
+                      X
+                    </button>
+                  </div>
+                )}
+              </Popup>
+              <button>Upvote</button>
+              <button>DownVote</button>
+              <button>Remove from List</button>
+            </div>
           </div>
+        ))}
+      </div>
+    </>
+  );
+};
 
-          <div className="textContainer">
-            <p>Title: {i.show.name === null ? "N/A" : i.show.name}</p>
-            <p>
-              Network:{" "}
-              {i.show.network === null
-                ? "N/A"
-                : i.show.network.name === null
-                ? "N/A"
-                : i.show.network.name}
-            </p>
-            <p>
-              Country:{" "}
-              {i.show.network === null
-                ? "N/A"
-                : i.show.network.country === null
-                ? "N/A"
-                : i.show.network.country.code === null
-                ? "N/A"
-                : i.show.network.country.code}
-            </p>
-
-            <p>
-              Genre(s):
-              {i.show.genres.map((g) => (
-                <span key={`${i.show.id}` + `${g}`}>{g} </span>
-              ))}
-            </p>
-            <p className="summary">
-              {i.show.summary === null
-                ? "N/A"
-                : i.show.summary.replace(/<(.|\n)*?>/g, "")}
-            </p>
-          </div>
-          <button className="close" onClick={close}>
-            X
-          </button>
-        </div>
-      )}
-    </Popup>
-    <button>Upvote</button>
-    <button>DownVote</button>
-    <button>Remove from List</button>
-  </div>
-</div>
-  })}
-}
+export default ListDisplay;
