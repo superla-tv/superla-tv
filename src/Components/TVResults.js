@@ -1,6 +1,6 @@
 import Popup from 'reactjs-popup';
 // Config
-import { onValue, update, ref, push, set } from 'firebase/database';
+import { onValue, ref, push } from 'firebase/database';
 import database from '../firebase';
 import { useEffect } from 'react';
 // import 'reactjs-popup/dist/index.css';
@@ -53,14 +53,8 @@ const TVResults = ({ tvRes, showSearch }) => {
         // the event, the form, the select, current option, attributes, key, the value of the key
         const formId = parseInt(e.target.id);
         const keyRef = ref(database, `/${currentKey}`)
-        push(keyRef, tvRes[formId]);
-        push(tvRes[formId], tvRes[formId].show.name)
-        
-        // tvRes[formId].score, tvRes[formId].show.name, tvRes[formId].show.image.original
-        // update(keyRef, tvRes[formId]); replaces the value of listName as the show object
-        // push(keyRef, tvRes[formId]); replaces the value of listName with a unique key and then the value becomes the show object
-    } 
-
+        push(keyRef, tvRes[formId]);        
+        } 
 
     return (
         <>
@@ -73,7 +67,7 @@ const TVResults = ({ tvRes, showSearch }) => {
                         <div className="tvContainer wrapper" key={i.show.id}>
                             <div className="imgContainer">
                                 {i.show.image === null ? (
-                                    <img src="./assets/no-img-portrait-text.png" alt="stuff" />
+                                    <img src="./assets/no-img-portrait-text.png" alt="There is no image for this show" />
                                 ) : (
                                     <img
                                         src={i.show.image.original}
