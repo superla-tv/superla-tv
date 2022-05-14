@@ -43,7 +43,7 @@ const ListDisplay = ({ Array }) => {
     arrayToChangeOrder.splice(rankFormId, 1);
     arrayToChangeOrder.splice(rankChoice, 0, showInfoSaved);
     console.log(arrayToChangeOrder);
-
+    //now just push to firebase
   }
 
   return (
@@ -139,15 +139,7 @@ const ListDisplay = ({ Array }) => {
                 {Array.length < 9 ? null : <option value='8'>8</option> }
                 {Array.length < 10 ? null : <option value='9'>9</option> }
                 {Array.length < 11 ? null : <option value='10'>10</option> }
-                {/* <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option> */}
-                {/* <option value='5'>5</option>
-                <option value='6'>6</option>
-                <option value='7'>7</option>
-                <option value='8'>8</option>
-                <option value='9'>9</option>
-                <option value='10'>10</option> */}
+             
               </select>
             </form>
               <button>Remove from List</button>
