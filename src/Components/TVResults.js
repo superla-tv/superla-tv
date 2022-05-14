@@ -45,15 +45,15 @@ const TVResults = ({ tvRes, showSearch }) => {
 
   const handleAddToList = (e) => {
     e.preventDefault();
-    // query the selected option
-    // pull the key and use it to reference the dbRef
-    // push the show info
+    // query the selected option  
     const currentKey =
       e.target.lastElementChild.selectedOptions[0].attributes.key.value;
     // the event, the form, the select, current option, attributes, key, the value of the key
     const formId = parseInt(e.target.id);
+    // pull the key and use it to reference the dbRef
     const keyRef = ref(database, `/${currentKey}`);
     const workableArray = [];
+    // push the show info
     workableArray.push(tvRes[formId].show.name);
     workableArray.push(tvRes[formId].show.id);
     workableArray.push(tvRes[formId].show.image.original);
@@ -63,10 +63,9 @@ const TVResults = ({ tvRes, showSearch }) => {
     workableArray.push(tvRes[formId].show.network.name);
     workableArray.push(tvRes[formId].show.network.country.code);
     // workableArray.push(tvRes[formId].show.genres);
-
-    console.log(workableArray);
     push(keyRef, workableArray);
   };
+
 
   return (
     <>

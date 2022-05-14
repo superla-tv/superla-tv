@@ -1,7 +1,7 @@
 import Popup from 'reactjs-popup';
 import database from '../firebase';
 import { useEffect, useState } from 'react';
-import { ref, onValue } from 'firebase/database';
+import { ref, onValue, push} from 'firebase/database';
 import ListDisplay from './ListDisplay';
 
 const Lists = () => {
@@ -31,10 +31,10 @@ const Lists = () => {
 
   const handleListName = (e) => {
     e.preventDefault();
-    //     const listName = e.target[0].value;
-    //     //firebase
-    //     push(ref(database), {listName});
-    //     alert(`New list created: ${listName}`);
+    const listName = e.target[0].value;
+    //firebase
+    push(ref(database), {listName});
+    alert(`New list created: ${listName}`);
   };
 
   const loadCustomLists = (response) => {
@@ -55,11 +55,9 @@ const Lists = () => {
       theOption.innerText = displayedList;
       theSelect.appendChild(theOption);
     }
-  };
-
-  useEffect(() => {
-    const listInFirebase = ref(database, `/${listIdentifier}`);
-    // pull each of the shows from the chosen list
+  }; 
+    useEffect(() => {
+    const listInFirebase = ref(database, `/${listIdentifier}`)
     onValue(listInFirebase, (response) => {
       const customListResponse = response.val();
       const showArray = Object.entries(customListResponse);
@@ -111,11 +109,8 @@ const Lists = () => {
         <button>Delete List</button>
         <button>Refresh List</button>
       </div>
-      <h3 className="listTitle">
-        Current List:
-        {/* Selected list -> {_______} */}
-      </h3>
 
+      {/* ternary to be added */}
       <ListDisplay Array={listOfShows} />
     </>
   );
