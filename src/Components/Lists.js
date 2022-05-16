@@ -106,12 +106,9 @@ const Lists = () => {
             </div>
           )}
         </Popup>
-        <button>Delete List</button>
-        <button>Refresh List</button>
       </div>
-
-      {/* ternary to be added */}
-      <ListDisplay Array={listOfShows} />
+        
+      { listIdentifier === '' ? null : <ListDisplay Array={listOfShows} ListKey={listIdentifier} />}
     </>
   );
 };
