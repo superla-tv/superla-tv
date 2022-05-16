@@ -1,5 +1,7 @@
 import Popup from 'reactjs-popup';
+// Config
 import database from '../firebase';
+// Modules
 import { ref, push, set, update, remove } from 'firebase/database';
 import { useEffect, useState } from 'react';
 
@@ -105,7 +107,7 @@ const ListDisplay = ({ Array, ListKey }) => {
                       )}
                     </div>
 
-                    <div className="textContainer wrapper">
+                    <div className="textContainer">
                       <p>Title: {i[1][0] === null ? 'N/A' : i[1][0]}</p>
                       <p>
                         Network:
