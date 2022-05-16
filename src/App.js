@@ -1,7 +1,5 @@
 // Styling
 import './App.css';
-// Config
-// import dbRef from './firebase';
 // Modules
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -11,7 +9,9 @@ import TVResults from './Components/TVResults';
 import Nav from './Components/Nav';
 import Lists from './Components/Lists';
 
+// Initial display on load of app
 const Home = () => {
+  // Setting states for the query, submit, and response from API
   const [showSearch, setShowSearch] = useState('');
   const [tvRes, setTVRes] = useState([]);
   const [handleSubmit, setHandleSubmit] = useState(false);
@@ -21,7 +21,7 @@ const Home = () => {
     setHandleSubmit(true);
   }
 
-
+// API call with the showSearch state as query
   useEffect(() => {
     axios({
       url: "https://api.tvmaze.com/search/shows",
@@ -42,12 +42,13 @@ const Home = () => {
   return (
     <>
       <h1>Superla-TV</h1>
-      <form onSubmit={handleShowSearch}>
+      <form className="enterShow" onSubmit={handleShowSearch}>
         <label htmlFor='query'></label>
         <input
           type='text'
           id='query'
-          placeholder='enter tv show here'
+          className='query'
+          placeholder='Search for a show!'
         />
         <button>Search</button>
       </form>
@@ -74,10 +75,15 @@ const App = () => {
         <Nav />
       </header>
 
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/lists" element={<Lists />} />
       </Routes>
+      
+      <footer>
+        <p className='wrapper'>Built by <a href="https://www.rakesh-parmar.com/" target="_blank">Rakesh Parmar</a>, <a href="https://www.judslee.ca/" target="_blank">Judy Lee</a>, <a href="https://www.themeesh.ca/" target="_blank">Steve Mishos</a>, <a href="https://www.cristinacodes.com/" target="_blank">Cristina Grosser</a> at <a href='https://junocollege.com/' target='_blank'>Juno College</a></p>
+      </footer>
     </div>
   );
 }

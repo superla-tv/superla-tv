@@ -1,42 +1,33 @@
 import Popup from 'reactjs-popup';
+// Config
 import database from '../firebase';
+// Modules
 import { useEffect, useState } from 'react';
 import { ref, onValue, push} from 'firebase/database';
+// Components
 import ListDisplay from './ListDisplay';
 
 const Lists = () => {
-  // reach into firebase
-  // pull names of all lists
-  // options to
-  //create new list
-  // delete a list
-  // refresh list - showing updated vote counts
-  //when list is selected
-  //current list name displays
-  // each show displays
-  // poster
-  //title
-  //rank
-  //show info
-  //remove from list option
-  //upvote
-  //downvote
+  // States for shows on a list and the list identifier
   const [listIdentifier, setListIdentifier] = useState('');
   const [listOfShows, setListOfShows] = useState([]);
 
   const chooseListHandler = (e) => {
-    //take current key value of select
+    // take current key value of selected list
     setListIdentifier(e.target.selectedOptions[0].attributes.key.value);
   };
 
+  // Naming a new list
   const handleListName = (e) => {
     e.preventDefault();
+    // pull the value from input for list name
     const listName = e.target[0].value;
-    //firebase
+    // push into firebase and alert user
     push(ref(database), {listName});
     alert(`New list created: ${listName}`);
   };
 
+  // Pulling all list names from firebase for display list select
   const loadCustomLists = (response) => {
     const theSelect = document.querySelector('.selectAList');
     theSelect.innerText = '';
@@ -56,8 +47,11 @@ const Lists = () => {
       theSelect.appendChild(theOption);
     }
   }; 
+  // when list is chosen...
     useEffect(() => {
+      // find it in firebase
     const listInFirebase = ref(database, `/${listIdentifier}`)
+      // load all the shows on chosen list
     onValue(listInFirebase, (response) => {
       const customListResponse = response.val();
       const showArray = Object.entries(customListResponse);
@@ -65,6 +59,7 @@ const Lists = () => {
     });
   }, [listIdentifier]);
 
+  // load the list names from firebase
   useEffect(() => {
     onValue(ref(database), (response) => {
       loadCustomLists(response);

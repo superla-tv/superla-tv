@@ -1,7 +1,7 @@
 /* Base Styles */
-
 .App {
   text-align: center;
+  position: relative;
 }
 
 .wrapper {
@@ -11,10 +11,44 @@
 }
 
 img {
-  width: 70%;
+  width: 95%;
 }
 
-/* nav */
+body {
+  background-color: #16181E;
+  color: #f9f9f9;
+  font-size: 125%;
+  font-family: 'Inconsolata', monospace;
+}
+
+a {
+  color: #f9f9f9;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00b4a8;
+}
+
+h1 {
+  margin: 2rem 0;
+  font-family: 'Anton', sans-serif;
+}
+
+button {
+  background-color: #005a54;
+  color: #f9f9f9;
+  border: none;
+  padding: .6rem;
+  border-radius: .6rem;
+}
+
+button:hover, button:focus {
+  background-color: #f9f9f9;
+  color:#005a54;
+
+}
+  /* nav */
 
 nav {
   display: flex;
@@ -33,19 +67,41 @@ nav a {
   padding: 10px;
 }
 
-nav a:hover {
-  background-color: aqua;
+footer {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(120px);
 }
 
+
+/* App.js */
+
+.enterShow {
+  display: flex;
+  flex-direction: column;
+  width:80%;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.query {
+  height: 2.5rem;
+  background-color: #21242D;
+  color: #f9f9f9;
+  border: 1px solid #f9f9f9;
+  border-radius: .6rem;
+  text-align: center;
+}
 /* TV Results */
 
 .tvContainer {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
-  background-color: palegoldenrod;
-  border: 1px solid black;
+  background-color: #21242d;
+  border: 1px solid #f9f9f9;
   padding: 10px 0;
+  border-radius: .7rem;
 }
 
 .tvContainer .flexContainer {
@@ -71,12 +127,44 @@ nav a:hover {
   flex-direction: column-reverse;
 }
 
+.close {
+  background-color: #21242D;
+  border: 1px solid #f9f9f9;
+  margin: 20px 0 0 0;
+  width: 50px;
+}
+
 .modal {
-  background: green;
+  background: #005a54;
+  line-height: 1.5rem;
 }
 
 .infoModal {
-  background: red;
+  background: rgba(0, 90, 84, 0.856);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  border-radius: .7rem;
+}
+
+.infoModal .imgContainer {
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.infoModal .textContainer .summary {
+  height: 35vh;
+  overflow-y: scroll;
+  margin: 8px 0 0 0;
+  scrollbar-color: #f9f9f9 #002724;
+  }
+
+.infoModal .textContainer {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #005a54;
 }
 
 .showContainer:last-child {
@@ -87,7 +175,34 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   margin: 30px auto;
-  background-color: palegoldenrod;
+  background-color: #21242d;
   border: 1px solid black;
   padding: 10px 0;
+}
+
+.newListModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: .7rem;
+}
+
+.newListModal .newListForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 15px 25px 15px;
+  gap: 15px;
+}
+
+.newListModal .submitList {
+  background-color: #21242d;
+  border: 1px solid #f9f9f9; 
+  padding: 10px 20px;
+}
+
+.newListQuery {
+  height: 2.5rem;
+  border-radius: .6rem;
+  text-align: center; 
 }

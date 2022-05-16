@@ -105,7 +105,7 @@ const ListDisplay = ({ Array, ListKey }) => {
                       )}
                     </div>
 
-                    <div className="textContainer">
+                    <div className="textContainer wrapper">
                       <p>Title: {i[1][0] === null ? 'N/A' : i[1][0]}</p>
                       <p>
                         Network:

@@ -1,22 +1,28 @@
 import Popup from 'reactjs-popup';
 // Config
-import { onValue, ref, push } from 'firebase/database';
 import database from '../firebase';
+// Modules 
+import { onValue, ref, push } from 'firebase/database';
 import { useEffect } from 'react';
-// import 'reactjs-popup/dist/index.css';
 
+// passing in the API response and search query to render 
 const TVResults = ({ tvRes, showSearch }) => {
+  // Naming a new list
   const handleListName = (e) => {
     e.preventDefault();
+    // pull the value from input for list name
     const listName = e.target[0].value;
-    //firebase
+    // push into firebase and alert user
     push(ref(database), { listName });
     alert(`New list created: ${listName}`);
   };
 
+  // Pulling all list names from firebase for 'add to list' select
   const loadLists = (response) => {
+    // grab all 'add to list' selects and change from nodelist to array
     const theSelect = document.querySelectorAll('.selectAList');
     const arrayOfSelects = Array.prototype.slice.call(theSelect);
+    // map through all selects to append list names
     arrayOfSelects.map((select) => {
       select.innerText = '';
       const disabledOption = document.createElement('option');
@@ -37,15 +43,17 @@ const TVResults = ({ tvRes, showSearch }) => {
     });
   };
 
+  // When a tv response comes through, load the lists created
   useEffect(() => {
     onValue(ref(database), (response) => {
       loadLists(response);
     });
   }, [tvRes]);
 
+  // Handle adding shows to a list
   const handleAddToList = (e) => {
     e.preventDefault();
-    // query the selected option  
+    // query the selected list (option)  
     const currentKey =
       e.target.lastElementChild.selectedOptions[0].attributes.key.value;
     // the event, the form, the select, current option, attributes, key, the value of the key
@@ -62,7 +70,7 @@ const TVResults = ({ tvRes, showSearch }) => {
     workableArray.push(tvRes[formId].show.summary);
     workableArray.push(tvRes[formId].show.network.name);
     workableArray.push(tvRes[formId].show.network.country.code);
-    // workableArray.push(tvRes[formId].show.genres);
+    // push the info to firebase
     push(keyRef, workableArray);
   };
 
@@ -103,6 +111,10 @@ const TVResults = ({ tvRes, showSearch }) => {
                 >
                   {(close) => (
                     <div className="infoModal modal">
+
+                        <button className="close" onClick={close}>
+                        X
+                        </button>
                       <div className="imgContainer">
                         {i.show.image === null ? (
                           <img
@@ -140,22 +152,12 @@ const TVResults = ({ tvRes, showSearch }) => {
                             : i.show.network.country.code}
                         </p>
 
-                        {/* We will exclude genres for now. Stretch goal.
-                         <p>
-                          Genre(s):
-                          {i.show.genres.map((g) => (
-                            <span key={`${i.show.id}` + `${g}`}>{g} </span>
-                          ))}
-                        </p> */}
                         <p className="summary">
                           {i.show.summary === null
                             ? 'N/A'
                             : i.show.summary.replace(/<(.|\n)*?>/g, '')}
                         </p>
                       </div>
-                      <button className="close" onClick={close}>
-                        X
-                      </button>
                     </div>
                   )}
                 </Popup>
@@ -165,18 +167,19 @@ const TVResults = ({ tvRes, showSearch }) => {
                   nested
                 >
                   {(close) => (
-                    <div className="modal">
-                      <form onSubmit={handleListName}>
+                    <div className="newListModal modal">
+                      <button className="close" onClick={close}>
+                        X
+                      </button>
+                      <form className="newListForm" onSubmit={handleListName}>
                         <input
                           type="text"
                           placeholder="Name Your List"
                           maxLength="40"
+                          className='newListQuery'
                         />
                         <button className="submitList">Submit</button>
                       </form>
-                      <button className="close" onClick={close}>
-                        X
-                      </button>
                     </div>
                   )}
                 </Popup>
