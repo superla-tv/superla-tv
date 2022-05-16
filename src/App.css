@@ -41,13 +41,14 @@ button {
   border: none;
   padding: .6rem;
   border-radius: .6rem;
+  margin: 10px 10px;
 }
 
 button:hover, button:focus {
   background-color: #f9f9f9;
   color:#005a54;
-
 }
+
   /* nav */
 
 nav {
@@ -176,8 +177,9 @@ footer {
   flex-direction: column;
   margin: 30px auto;
   background-color: #21242d;
-  border: 1px solid black;
+  border: 1px solid #f9f9f9;
   padding: 10px 0;
+  border-radius: .7rem;
 }
 
 .newListModal {
