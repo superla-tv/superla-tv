@@ -1,9 +1,9 @@
 import Popup from 'reactjs-popup';
 // Config
-import database from '../firebase';
+// import database from '../firebase';
 // Modules
-import { ref, push, set, update, remove } from 'firebase/database';
-import { useEffect, useState } from 'react';
+// import { ref, push, set, update, remove } from 'firebase/database';
+// import { useEffect, useState } from 'react';
 
 const ListDisplay = ({ Array, ListKey }) => {
   //const [ updatedArray, setUpdatedArray ] = useState([]);
