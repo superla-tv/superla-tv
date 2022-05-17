@@ -206,3 +206,18 @@ footer {
   border-radius: .6rem;
   text-align: center; 
 }
+
+@media (min-width: 500px) {
+  .tvContainer {
+    max-width: 500px;
+  }
+
+  .enterShow {
+    max-width: 500px;
+  }
+
+  .showContainer {
+    max-width: 500px;
+  }
+
+}
