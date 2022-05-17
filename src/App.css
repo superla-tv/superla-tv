@@ -69,11 +69,9 @@ nav a {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  transform: translateY(120px);
+  transform: translateY(60px);
+  margin-bottom: 100px;
 }
-
 
 /* App.js */
 
