@@ -23,6 +23,7 @@ const TVResults = ({ tvRes, showSearch }) => {
     const theSelect = document.querySelectorAll('.selectAList');
     const arrayOfSelects = Array.prototype.slice.call(theSelect);
     // map through all selects to append list names
+    // eslint-disable-next-line array-callback-return
     arrayOfSelects.map((select) => {
       select.innerText = '';
       const disabledOption = document.createElement('option');
