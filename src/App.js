@@ -82,7 +82,7 @@ const App = () => {
       </Routes>
       
       <footer>
-        <p className='wrapper'>Built by <a href="https://www.rakesh-parmar.com/" target="_blank">Rakesh Parmar</a>, <a href="https://www.judslee.ca/" target="_blank">Judy Lee</a>, <a href="https://www.themeesh.ca/" target="_blank">Steve Mishos</a>, <a href="https://www.cristinacodes.com/" target="_blank">Cristina Grosser</a> at <a href='https://junocollege.com/' target='_blank'>Juno College</a></p>
+        <p className='wrapper'>Built by <a href="https://www.rakesh-parmar.com/" target="_blank" rel="noreferrer">Rakesh Parmar</a>, <a href="https://www.judslee.ca/" target="_blank" rel="noreferrer">Judy Lee</a>, <a href="https://www.themeesh.ca/" target="_blank" rel="noreferrer">Steve Mishos</a>, <a href="https://www.cristinacodes.com/" target="_blank" rel="noreferrer">Cristina Grosser</a> at <a href='https://junocollege.com/' target='_blank' rel="noreferrer">Juno College</a></p>
       </footer>
     </div>
   );
